@@ -1,23 +1,169 @@
-<html>
-
+<!doctype html>
+<html lang="id">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <title>Internet hotspot - Error</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Yukari Hotspot - Error</title>
+    <link rel="icon" href="Saotome Yuka (PGR).ico" type="ico">
+        
+    <style>
+        /* --- CSS DARI STATUS.HTML --- */
+        :root {
+            --accent: #ff0000;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.75);
+            --card-radius: 14px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: #0b0f1a;
+            color: var(--text);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.55);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+            z-index: -1
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 95%;
+        }
+
+        .card {
+            padding: 28px 32px;
+            border-radius: var(--card-radius);
+            width: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+            box-sizing: border-box;
+            backdrop-filter: blur(6px);
+            max-width: 420px;
+            text-align: center;
+        }
+        
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        
+        .brand h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        
+        /* Style Khusus Kotak Error */
+        .error-box {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            color: #ff0000;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(136deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 400px) {
+            body { padding: 16px; }
+            .card { padding: 24px 20px; }
+            .brand h2 { font-size: 18px; }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="ie-fixMinHeight">
-        <div class="main">
-            <div class="wrap">
-                <h1>Hotspot error: $(error)</h1>
-                <p class="info">Log in page: <a href="$(link-login)">$(link-login)</a></p>
-            </div>
-        </div>
-    </div>
-</body>
+    <div class="overlay"></div>
 
+    <main class="container">
+        <aside class="card">
+            
+            <div class="brand">
+                <div>
+                    <h2>Terjadi Kesalahan</h2>
+                    <p>Yukari Hotspot</p>
+                </div>
+            </div>
+
+            <div class="error-box">
+                $(error)
+            </div>
+
+            <div class="actions">
+                <button type="button" onclick="window.location.href='$(link-login)'">Kembali ke Login</button>
+            </div>
+            
+        </aside>
+    </main>
+</body>
 </html>
