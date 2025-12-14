@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>Logout Berhasil - Yukari Hotspot</title>
+    <link rel="icon" href="Saotome Yuka (PGR).ico" type="ico">
+    
+    <style>
+        /* --- CSS UTAMA (Konsisten dengan tema sebelumnya) --- */
+        :root {
+            --accent: #ff0000;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.75);
+            --card-radius: 14px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: #0b0f1a;
+            color: var(--text);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        /* Background Gradient & Blur */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.55);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+            z-index: -1
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            padding: 32px;
+            border-radius: var(--card-radius);
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+            backdrop-filter: blur(6px);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Header Brand */
+        .brand {
+            margin-bottom: 24px;
+        }
+        
+        .brand h2 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .logout-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ff0000; /* Aksen warna pink/merah muda untuk logout */
+        }
+
+        /* Tabel Ringkasan Sesi */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+            margin-bottom: 24px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .summary-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table td:first-child {
+            color: var(--muted);
+            width: 40%;
+        }
+
+        .summary-table td:last-child {
+            color: var(--text);
+            font-weight: 500;
+            text-align: right;
+        }
+
+        button {
+            background: linear-gradient(136deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .footer-note {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+    </style>
+
+    <script language="JavaScript">
+        function openLogin() {
+            if (window.name != 'hotspot_logout') return true;
+            open('$(link-login)', '_blank', '');
+            window.close();
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <main class="container">
+        <div class="card">
+            <div class="brand">
+                <h2>Yukari Hotspot</h2>
+                <p>Sesi Berakhir</p>
+            </div>
+
+            <div class="logout-title">Anda Telah Logout</div>
+
+            <table class="summary-table">
+                <tr>
+                    <td>Username</td>
+                    <td>$(username)</td>
+                </tr>
+                <tr>
+                    <td>Durasi</td>
+                    <td>$(uptime)</td>
+                </tr>
+                <tr>
+                    <td>Download</td>
+                    <td>$(bytes-out-nice)</td>
+                </tr>
+                <tr>
+                    <td>Upload</td>
+                    <td>$(bytes-in-nice)</td>
+                </tr>
+            </table>
+
+            <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+                <button type="submit">Login Kembali</button>
+            </form>
+
+            <div class="footer-note">
+                Terima kasih telah menggunakan layanan kami.
+            </div>
+        </div>
+    </main>
+</body>
+</html>

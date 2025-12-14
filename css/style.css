@@ -1,0 +1,356 @@
+:root {
+    --accent: #ff6fa3;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.75);
+    --card-radius: 14px;
+    --max-content-width: 1000px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    background-color: #0b0f1a;
+    color: var(--text);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  /* Hapus background di sini kalau pakai body::before */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px) brightness(0.55);
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+    z-index: -1
+}
+
+.container {
+    width: 100%;
+    max-width: var(--max-content-width);
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 28px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.promo {
+    padding: 28px;
+    border-radius: var(--card-radius);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+}
+
+.promo h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 0.2px
+}
+
+.promo p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.45
+}
+
+.art-card {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: 18px
+}
+
+.art-thumb {
+    width: 92px;
+    height: 92px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 0 0 92px;
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+}
+
+.art-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block
+}
+
+.art-meta {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+.art-meta .title {
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 6px
+}
+
+.meta-small {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 4px
+}
+
+.card {
+    padding: 26px;
+    border-radius: var(--card-radius);
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+    box-sizing: border-box;
+    backdrop-filter: blur(6px);
+}
+
+.brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px
+}
+
+.brand h2 {
+    margin: 0;
+    font-size: 18px
+}
+
+.brand p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px
+}
+
+label {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    outline: none;
+    font-size: 15px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input:focus {
+    box-shadow: 0 0 0 3px rgba(255, 111, 166, 0.12);
+    border-color: rgba(38, 49, 156, 0.9)
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px
+}
+
+button {
+    background: linear-gradient(136deg, #6a11cb 0%, #2575fc 100%);
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    flex: 1;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+}
+
+
+.secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--muted);
+    padding: 10px 12px;
+    font-size: 14px
+}
+
+.small {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 12px
+}
+
+/* Small device adjustments */
+@media (max-width: 880px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 16px
+    }
+
+    .promo {
+        order: 2;
+        padding: 20px
+    }
+
+    .card {
+        order: 1;
+        padding: 20px
+    }
+
+    .brand h2 {
+        font-size: 16px
+    }
+
+    .promo h1 {
+        font-size: 22px
+    }
+
+    .art-thumb {
+        width: 72px;
+        height: 72px;
+        flex: 0 0 72px
+    }
+
+    input[type=text],
+    input[type=password] {
+        font-size: 16px;
+        padding: 14px
+    }
+
+    button {
+        padding: 14px;
+        font-size: 16px
+    }
+
+    body {
+        padding: 16px
+    }
+}
+
+/* Very small phones (narrow) */
+@media (max-width:420px) {
+    :root {
+        --card-radius: 12px
+    }
+
+    .promo {
+        padding: 16px
+    }
+
+    .card {
+        padding: 16px
+    }
+
+    .promo h1 {
+        font-size: 20px
+    }
+
+    .brand {
+        gap: 10px
+    }
+
+    .logo {
+        width: 48px;
+        height: 48px
+    }
+
+    .art-meta {
+        font-size: 12px
+    }
+
+    .actions {
+        flex-direction: column
+    }
+
+    .actions button {
+        width: 100%;
+        flex: none
+    }
+}
+
+/* Tablet / large phone landscape */
+@media (min-width:881px) and (max-width:1199px) {
+    .container {
+        grid-template-columns: 1fr 380px;
+        gap: 20px
+    }
+
+    .promo {
+        padding: 22px
+    }
+
+    .card {
+        padding: 22px
+    }
+}
+
+/* Accessibility: focus outlines for keyboard users */
+:focus {
+    outline: none
+}
+
+a:focus,
+button:focus,
+input:focus {
+    outline: 3px solid rgba(124, 198, 255, 0.16);
+    outline-offset: 2px
+}
+
+/* Ensure the content stays visible when mobile keyboard opens (soft-keyboard) */
+@supports (height: 100dvh) {
+
+    html,
+    body {
+        height: 100dvh;
+    }
+}

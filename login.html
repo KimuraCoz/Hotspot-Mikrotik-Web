@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/img/Saotome Yuka PGR.ico" type="ico">
+    <title>Yukari Hotspot - Masuk</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.getElementById('username').value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.getElementById('password').value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+    </script>
+    $(endif)
+
+    <div class="overlay"></div>
+
+    <main class="container" role="main" aria-labelledby="title">
+        <section class="promo" aria-hidden="false">
+            <h1 id="title">Selamat Datang di WiFi Yukari</h1>
+            <p>Nikmati akses internet sambil menikmati kopi. Silakan login menggunakan akun hotspot Anda.</p>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="img/origin.webp" alt="Artwork thumbnail" />
+                </div>
+                <div class="art-meta">
+                    <div class="title">Cheval Grand - Uma Musumee</div>
+                    <div>Creator: <strong>Zulmi Cahya Pratama</strong></div>
+                    <div class="meta-small">Tanggal dibuat: 1 November 2025</div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="card" role="form" aria-label="Form login hotspot">
+            <div class="brand">
+                <div>
+                    <h2>Yukari Hotspot</h2>
+                    <p>Free WiFi • Akses terbatas</p>
+                </div>
+            </div>
+
+            $(if error)
+            <div style="color: #d32f2f; background-color: #ffebee; padding: 10px; border-radius: 4px; margin-bottom: 1rem; font-size: 14px;">
+                <strong>Login Gagal:</strong> $(error)
+            </div>
+            $(endif)
+
+            <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                <input type="hidden" name="dst" value="$(link-orig)" />
+                <input type="hidden" name="popup" value="true" />
+
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" value="$(username)" required />
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required />
+
+                <div class="actions">
+                    <button type="submit">Login</button>
+                    $(if trial == 'yes')
+                        <button type="button" class="secondary" onclick="location.href='$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)'">Free Trial</button>
+                    $(else)
+                        <button type="button" class="secondary" onclick="location.reload()">Refresh</button>
+                    $(endif)
+                </div>
+            </form>
+        </aside>
+    </main>
+</body>
+</html>

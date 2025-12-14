@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="id">
+<head>
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>Yukari Hotspot - Status</title>
+    <link rel="icon" href="Saotome Yuka (PGR).ico" type="ico">
+
+    <script>
+        // --- Skrip Asli MikroTik (JANGAN DIHAPUS) ---
+        $(if advert-pending == 'yes')
+            // (Meskipun link dihapus, fungsi JS ini sebaiknya tetap ada 
+            //  jika sewaktu-waktu fitur diaktifkan lagi di server)
+            var popup = '';
+            function focusAdvert() {
+                if (window.focus) popup.focus();
+            }
+            function openAdvert() {
+                popup = open('$(link-advert)', 'hotspot_advert', '');
+                setTimeout("focusAdvert()", 1000);
+            }
+        $(endif)
+
+        function openLogout() {
+            if (window.name != 'hotspot_status') return true;
+                open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+        // --- Akhir Skrip Asli ---
+    </script>
+        
+    <style>
+        /* --- CSS UTAMA (Sudah Dibersihkan) --- */
+        :root {
+            --accent: #ff6fa3;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.75);
+            --card-radius: 14px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: #0b0f1a;
+            color: var(--text);
+        }
+
+        /* Background dari login.html */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.55);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+            z-index: -1
+        }
+
+        /* --- STYLE KHUSUS STATUS.HTML (Override) --- */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 95%;
+        }
+
+        .card {
+            padding: 28px 32px;
+            border-radius: var(--card-radius);
+            width: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+            box-sizing: border-box;
+            backdrop-filter: blur(6px);
+            max-width: 420px; /* Dibuat ramping untuk status box */
+            text-align: center;
+        }
+        
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        
+        .brand h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 24px;
+            justify-content: center;
+        }
+
+        button, input[type="submit"] {
+            background: linear-gradient(136deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1; /* Tombol memenuhi space */
+            font-size: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Style Elemen Status (Tetap sama) --- */
+        .session-info {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .session-info tr {
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .session-info tr:last-child {
+            border-bottom: none;
+        }
+        .session-info td {
+            padding: 12px 16px;
+        }
+        .session-info td:first-child {
+            color: var(--muted);
+            font-weight: 600;
+            width: 45%;
+        }
+        .session-info td:last-child {
+            color: var(--text);
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        .status-footer {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 16px;
+            margin-bottom: -10px;
+            height: 20px;
+        }
+        /* (Link iklan sudah dihapus) */
+
+        /* --- Media Query Sederhana (Baru) --- */
+        @media (max-width: 400px) {
+            body {
+                padding: 16px;
+            }
+            .card {
+                padding: 24px 20px;
+            }
+            .session-info td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            .brand h2 { font-size: 18px; }
+        }
+    </style>
+</head>
+
+<body $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
+    <div class="overlay"></div>
+
+    <main class="container">
+        <aside class="card">
+            
+            <div class="brand">
+                <div>
+                    $(if login-by == 'trial')
+                        <h2>Status (Trial)</h2>
+                    $(elif login-by != 'mac')
+                        <h2>Halo, $(username)!</h2>
+                    $(else)
+                        <h2>Status Sesi</h2>
+                    $(endif)
+                    <p>Yukari Hotspot</p>
+                </div>
+            </div>
+
+            <table class="session-info">
+                <tr>
+                    <td>IP Address</td>
+                    <td>$(ip)</td>
+                </tr>
+                <tr>
+                    <td>Upload / Download</td>
+                    <td>$(bytes-out-nice) / $(bytes-in-nice)</td>
+                </tr>
+                $(if session-time-left)
+                <tr>
+                    <td>Waktu / Sisa</td>
+                    <td>$(uptime) / $(session-time-left)</td>
+                </tr>
+                $(else)
+                <tr>
+                    <td>Terkoneksi</td>
+                    <td>$(uptime)</td>
+                </tr>
+                $(endif)
+            </table>
+
+            <div class="status-footer">
+                $(if refresh-timeout)
+                    Refresh dalam $(refresh-timeout-secs) detik...
+                $(endif)
+            </div>
+
+            $(if login-by-mac != 'yes')
+            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()" class="actions">
+                <input type="submit" value="Logout">
+            </form>
+            $(endif)
+            
+        </aside>
+    </main>
+</body>
+</html>

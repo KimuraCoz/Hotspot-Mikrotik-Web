@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    
+    <meta http-equiv="refresh" content="5; url=$(link-status)">
+    
+    <title>Login Berhasil - Yukari Hotspot</title>
+    <link rel="icon" href="Saotome Yuka (PGR).ico" type="ico">
+    
+    <style>
+        :root {
+            --accent: #ff6fa3;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.75);
+            --card-radius: 14px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: #0b0f1a;
+            color: var(--text);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.55);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+            z-index: -1
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            padding: 32px;
+            border-radius: var(--card-radius);
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+            backdrop-filter: blur(6px);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        
+        .brand h2 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .content-title {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .content-desc {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 0 0 24px 0;
+            line-height: 1.5;
+        }
+
+        button {
+            background: linear-gradient(136deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .loading-bar {
+            height: 4px;
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: #ff0000; 
+            /* UBAH DI SINI (2): Ubah 2s menjadi 5s */
+            animation: load 5s linear forwards;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+
+    <script language="JavaScript">
+        function startRedirect() {
+            // UBAH DI SINI (3): Ubah 1500 menjadi 5000 (5 detik)
+            setTimeout(function() {
+                location.href = '$(link-status)';
+            }, 5000); 
+        }
+    </script>
+</head>
+
+<body onLoad="startRedirect()">
+
+    <div class="overlay"></div>
+
+    <main class="container">
+        <div class="card">
+            <div class="brand">
+                <h2>Yukari Hotspot</h2>
+                <p>System Notification</p>
+            </div>
+            
+            <div class="content-title">Login Berhasil!</div>
+            <div class="content-desc">
+                Halo, <strong>$(username)</strong>.<br>
+                Koneksi internet Anda sudah aktif.
+            </div>
+            
+            <div style="font-size: 12px; margin-bottom: 10px; color: var(--muted);">Mengalihkan ke status...</div>
+            
+            <div class="loading-bar"></div>
+
+            <br>
+            
+            <button onclick="location.href='$(link-status)'">
+                Buka Status Sekarang
+            </button>
+        </div>
+    </main>
+
+</body>
+</html>
