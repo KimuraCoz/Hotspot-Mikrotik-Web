@@ -1,12 +1,155 @@
 $(if http-status == 302)Hotspot redirect$(endif)
 $(if http-header == "Location")$(link-redirect)$(endif)
-<html>
+<!doctype html>
+<html lang="id">
 <head>
-<title>...</title>
-<meta http-equiv="refresh" content="0; url=$(link-redirect)">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    
+    <meta http-equiv="refresh" content="0; url=$(link-redirect)">
+    
+    <title>Mengalihkan... - Yukari Hotspot</title>
+    <link rel="icon" href="img/Saotome Yuka PGR.ico" type="ico">
+    
+    <style>
+        /* --- CSS TEMA UTAMA --- */
+        :root {
+            --accent: #ff0000;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.75);
+            --card-radius: 14px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: #0b0f1a;
+            color: var(--text);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.55);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+            z-index: -1
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            padding: 32px;
+            border-radius: var(--card-radius);
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+            backdrop-filter: blur(6px);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .brand h2 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--text);
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 25px auto;
+        }
+
+        .message {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .manual-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 13px;
+            border: 1px solid rgba(255, 111, 163, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .manual-link:hover {
+            background: rgba(255, 111, 163, 0.1);
+        }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
 </head>
+
 <body>
+    <div class="overlay"></div>
+
+    <main class="container">
+        <div class="card">
+            <div class="brand">
+                <h2>Yukari Hotspot</h2>
+                <p>Redirecting...</p>
+            </div>
+            
+            <div class="loading-spinner"></div>
+            
+            <div class="message">
+                Sedang mengalihkan ke tujuan Anda.<br>
+                Mohon tunggu sebentar...
+            </div>
+
+            <a href="$(link-redirect)" class="manual-link">
+                Klik di sini jika tidak dialihkan
+            </a>
+        </div>
+    </main>
 </body>
 </html>

@@ -1,40 +1,190 @@
-<html>
+<!doctype html>
+<html lang="id">
 <head>
-<meta http-equiv="refresh" content="2; url=$(link-orig)">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />   
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<title>Internet hotspot - Advertisement</title>
-<link rel="stylesheet" href="css/style.css">
-<script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    
+    <meta http-equiv="refresh" content="2; url=$(link-orig)">
+    
+    <title>Advertisement - Yukari Hotspot</title>
+    <link rel="icon" href="img/Saotome Yuka PGR.ico" type="ico">
+    
+    <style>
+        /* --- CSS TEMA UTAMA --- */
+        :root {
+            --accent: #ff6fa3;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.75);
+            --card-radius: 14px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
 
-    var popup = '';
-    function openOrig() {
-	if (window.focus) popup.focus();
-	location.href = unescape('$(link-orig-esc)');
-    }
-    function openAd() {
-	location.href = unescape('$(link-redirect-esc)');
-    }
-    function openAdvert() {
-	if (window.name != 'hotspot_advert') {
-		popup = open('$(link-redirect)', 'hotspot_advert', '');
-		setTimeout("openOrig()", 1000);
-		return;
-	}
-	setTimeout("openAd()", 1000);
-    }
-</script>
+        html {
+            height: 100%;
+            margin: 0;
+            background-color: #0b0f1a;
+            color: var(--text);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.55);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 6, 15, 0.25), rgba(3, 6, 15, 0.6));
+            z-index: -1
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            padding: 32px;
+            border-radius: var(--card-radius);
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 6px 24px rgba(2, 4, 10, 0.5);
+            backdrop-filter: blur(6px);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .brand h2 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .content-title {
+            margin: 20px 0 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .content-desc {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        button {
+            background: linear-gradient(136deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: transform 0.2s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button.secondary {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+
+    <script language="JavaScript">
+        // --- Logic Asli MikroTik Dipertahankan ---
+        var popup = '';
+        function openOrig() {
+            if (window.focus) popup.focus();
+            location.href = unescape('$(link-orig-esc)');
+        }
+        function openAd() {
+            location.href = unescape('$(link-redirect-esc)');
+        }
+        function openAdvert() {
+            if (window.name != 'hotspot_advert') {
+                popup = open('$(link-redirect)', 'hotspot_advert', '');
+                setTimeout("openOrig()", 1000);
+                return;
+            }
+            setTimeout("openAd()", 1000);
+        }
+    </script>
 </head>
+
 <body onLoad="openAdvert()">
-    <div class="ie-fixMinHeight">
-        <div class="main">
-            <div class="wrap">
-                <h1>Advertisement</h1>
-                <p class="info">If nothing happens, open <a href="$(link-redirect)" target="hotspot_advert">advertisement</a> manually.</p>
+    <div class="overlay"></div>
+
+    <main class="container">
+        <div class="card">
+            <div class="brand">
+                <h2>Yukari Hotspot</h2>
+                <p>Advertisement</p>
             </div>
+            
+            <div class="content-title">Membuka Iklan...</div>
+            
+            <div class="loading-spinner"></div>
+            
+            <div class="content-desc">
+                Sistem sedang mencoba membuka halaman iklan di jendela baru (popup).
+            </div>
+
+            <button onclick="openAdvert()">Buka Iklan Manual</button>
+            
+            <button class="secondary" onclick="location.href='$(link-orig)'">
+                Lanjut ke Internet
+            </button>
         </div>
-    </div>
+    </main>
 </body>
 </html>
